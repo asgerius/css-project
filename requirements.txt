@@ -1,0 +1,9 @@
+networkx
+python-louvain
+
+pandas
+numpy>=1.20.0
+matplotlib
+
+pelutils>=0.5.9
+stackapi
