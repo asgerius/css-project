@@ -7,3 +7,5 @@ matplotlib
 
 pelutils>=0.5.9
 stackapi
+tqdm
+click
