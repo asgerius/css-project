@@ -13,10 +13,9 @@ from pprint import pformat
 from tqdm import tqdm
 
 # Fetch data from five years
-N_YEARS = 10
 DAY_INTERVAL = 14
 START_DATE = dt.datetime(2010, 1, 1)
-END_DATE = START_DATE + dt.timedelta(years=N_YEARS)
+END_DATE = dt.datetime(2020, 1, 1)
 
 SITE = stackapi.StackAPI("stackoverflow")
 SITE.max_pages = 1
