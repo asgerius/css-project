@@ -26,7 +26,3 @@ loved_languages = {
     "Objective-C": 23.4,
     "VBA":         19.6,
 }
-
-aliases = {
-    "python": ["python-3.x", "python-2.7"]
-}

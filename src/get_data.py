@@ -13,10 +13,9 @@ from pprint import pformat
 from tqdm import tqdm
 
 # Fetch data from five years
-N_YEARS = 10
 DAY_INTERVAL = 14
 START_DATE = dt.datetime(2010, 1, 1)
-END_DATE = START_DATE + dt.timedelta(years=N_YEARS)
+END_DATE = dt.datetime(2020, 1, 1)
 
 SITE = stackapi.StackAPI("stackoverflow")
 SITE.max_pages = 1
@@ -65,6 +64,7 @@ def get_data(language: str) -> pd.DataFrame:
     log("Got %i responses" % len(questions), "Remaining quota: %i" % quota_remaing)
 
     log.section("Filtering questions")
+    os.makedirs("data", exist_ok=True)
     # Save useful things from response
     useful_question_keys = { "title", "body", "view_count", "score", "creation_date", "link",
         "question_id", "owner/user_id", "owner/reputation" }
@@ -77,7 +77,7 @@ def get_data(language: str) -> pd.DataFrame:
     ]
     df = pd.DataFrame(filtered_questions)
     del filtered_questions
-    q_path = os.path.join("data", "%s-questions-%s.pkl" % (language, START_DATE))
+    q_path = os.path.join("data", "%s-questions-%s.pkl" % (language, START_DATE.date()))
     df.to_pickle(q_path)
     log("Saved %i questions to %s" % (len(df), q_path))
     del df
@@ -95,7 +95,7 @@ def get_data(language: str) -> pd.DataFrame:
     ]
     df = pd.DataFrame(filtered_answers)
     del filtered_answers
-    a_path = os.path.join("data", "%s-answers-%s.pkl" % (language, START_DATE))
+    a_path = os.path.join("data", "%s-answers-%s.pkl" % (language, START_DATE.date()))
     df.to_pickle(a_path)
     log("Saved %i answers to %s" % (len(df), a_path))
     del df
@@ -113,7 +113,7 @@ def get_data(language: str) -> pd.DataFrame:
     ]
     df = pd.DataFrame(filtered_comments)
     del filtered_comments
-    c_path = os.path.join("data", "%s-comments-%s.pkl" % (language, START_DATE))
+    c_path = os.path.join("data", "%s-comments-%s.pkl" % (language, START_DATE.date()))
     df.to_pickle(c_path)
     log("Saved %i comments to %s" % (len(df), c_path))
     del df
