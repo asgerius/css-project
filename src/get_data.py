@@ -123,8 +123,8 @@ def get_data(language: str) -> pd.DataFrame:
 @click.command()
 @click.argument("language")
 def run(language: str):
-    if os.path.exists(path := os.path.join("data", "%s-questions-%s.pkl")):
-        cont = log.bool_input(log.input("%s eksisterer allerede. Vil du fortsætte alligevel? " % path), default=False)
+    if os.path.exists(os.path.join("data", "%s-questions-%s.pkl")):
+        cont = log.bool_input(log.input("%s eksisterer allerede. Vil du fortsætte alligevel? " % os.path.join("data", "%s-questions-%s.pkl")), default=False)
         if not cont:
             sys.exit()
     get_data(language)
