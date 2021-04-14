@@ -91,7 +91,7 @@ def get_data(language: str) -> pd.DataFrame:
             **{ key: _get_by_nested_keys(answer, key.split("/")) for key in answer.keys() & useful_answer_keys },
         }
         for q in tqdm(questions)
-        for answer in q["answers"]
+        for answer in q["answers"] if "answers" in q
     ]
     df = pd.DataFrame(filtered_answers)
     del filtered_answers
@@ -109,7 +109,7 @@ def get_data(language: str) -> pd.DataFrame:
             **{ key: _get_by_nested_keys(comment, key.split("/")) for key in comment.keys() & useful_comment_keys },
         }
         for q in tqdm(questions)
-        for comment in q["comments"]
+        for comment in q["comments"] if "comments" in q
     ]
     df = pd.DataFrame(filtered_comments)
     del filtered_comments
@@ -127,7 +127,7 @@ def run(language: str):
         cont = log.bool_input(log.input("%s eksisterer allerede. Vil du fortsætte alligevel? " % os.path.join("data", "%s-questions-%s.pkl")), default=False)
         if not cont:
             sys.exit()
-    get_data(language)
+    get_data(language.lower())
 
 
 if __name__ == "__main__":
