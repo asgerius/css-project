@@ -28,24 +28,17 @@ def _get_by_nested_keys(d: dict, keys: list[str]) -> tuple[str, Any]:
         return _get_by_nested_keys(d[keys[0]], keys[1:])
 
 def get_data(language: str) -> pd.DataFrame:
-    try:
-        with open("key.txt") as f:
-            key = f.read()
-    except:
-        key = None
-
     log.section("Getting data for %s from %s to %s" % (language, START_DATE.date(), END_DATE.date()-dt.timedelta(days=1)))
     quota_remaing = 300
     questions = list()
 
-    start, end = START_DATE, START_DATE + dt.timedelta(days=7)
+    start, end = START_DATE, START_DATE + dt.timedelta(days=DAY_INTERVAL)
     for i in log.tqdm(tqdm(range(N_REQUESTS))):
         # https://api.stackexchange.com/docs/questions#order=desc&min=20&sort=votes&tagged=python&filter=!*SU8CGYZitCB.D*(BDVIfh2KKqQ)7jqYCBJzAPqv1FF5P6ymFq8a9Bc8edtQc*PqJ)28g05P&site=stackoverflow&run=true
         r = SITE.fetch(
             "questions",
-            key=key,
-            fromdate=START_DATE,
-            todate=END_DATE,
+            fromdate=start,
+            todate=end,
             tagged=language,
             sort="creation",
             filter="!1vKwrUXWvyD.TpY90UkpXYBdGop(leg63YHefbVAp1OvUVcr6gm(GFSV5lk6l3zSE8i",
@@ -59,7 +52,7 @@ def get_data(language: str) -> pd.DataFrame:
 
         start += dt.timedelta(days=DAY_INTERVAL)
         end += dt.timedelta(days=DAY_INTERVAL)
-        if start == END_DATE:
+        if start >= END_DATE:
             break
         elif end > END_DATE:
             end = END_DATE
@@ -73,31 +66,31 @@ def get_data(language: str) -> pd.DataFrame:
     filtered_questions = [
         {
             "language": language,
-            **{ key: _get_by_nested_keys(q, key.split("/")) for key in q.keys() & useful_question_keys },
+            **{ key: str(_get_by_nested_keys(q, key.split("/"))) for key in useful_question_keys if key in q or "/" in key },
         }
         for q in tqdm(questions)
     ]
     df = pd.DataFrame(filtered_questions)
     del filtered_questions
-    q_path = os.path.join("data", "%s-questions_%s_%s.pkl" % (language, START_DATE.date(), END_DATE.date()))
+    q_path = os.path.join("data", "%s-questions.pkl" % language)
     df.to_pickle(q_path)
     log("Saved %i questions to %s" % (len(df), q_path))
     del df
 
     log.section("Filtering answers")
-    useful_answer_keys = { "body", "creation_date", "score", "question_id", "owner/user_id", "owner/reputation" }
+    useful_answer_keys = { "body", "creation_date", "score", "owner/user_id", "owner/reputation" }
     filtered_answers = [
         {
             "language": language,
             "question_id": q["question_id"],
-            **{ key: _get_by_nested_keys(answer, key.split("/")) for key in answer.keys() & useful_answer_keys },
+            **{ key: str(_get_by_nested_keys(answer, key.split("/"))) for key in useful_answer_keys if key in answer or "/" in key },
         }
         for q in tqdm(questions) if "answers" in q
         for answer in q["answers"]
     ]
     df = pd.DataFrame(filtered_answers)
     del filtered_answers
-    a_path = os.path.join("data", "%s-answers_%s_%s.pkl" % (language, START_DATE.date(), END_DATE.date()))
+    a_path = os.path.join("data", "%s-answers.pkl" % language)
     df.to_pickle(a_path)
     log("Saved %i answers to %s" % (len(df), a_path))
     del df
@@ -108,14 +101,14 @@ def get_data(language: str) -> pd.DataFrame:
         {
             "language": language,
             "question_id": q["question_id"],
-            **{ key: _get_by_nested_keys(comment, key.split("/")) for key in comment.keys() & useful_comment_keys },
+            **{ key: str(_get_by_nested_keys(comment, key.split("/"))) for key in useful_comment_keys if key in comment or "/" in key },
         }
         for q in tqdm(questions) if "comments" in q
         for comment in q["comments"]
     ]
     df = pd.DataFrame(filtered_comments)
     del filtered_comments
-    c_path = os.path.join("data", "%s-comments_%s_%s.pkl" % (language, START_DATE.date(), END_DATE.date()))
+    c_path = os.path.join("data", "%s-comments.pkl" % language)
     df.to_pickle(c_path)
     log("Saved %i comments to %s" % (len(df), c_path))
     del df
@@ -125,7 +118,7 @@ def get_data(language: str) -> pd.DataFrame:
 @click.command()
 @click.argument("language")
 def run(language: str):
-    path = os.path.join("data", "%s-questions_%s_%s.pkl" % (language, START_DATE.date(), END_DATE.date()))
+    path = os.path.join("data", "%s-questions.pkl" % language)
     if os.path.exists(path):
         cont = log.bool_input(log.input("%s eksisterer allerede. Vil du fortsætte alligevel? [j/n] " % path), default=False)
         if not cont:
