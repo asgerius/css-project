@@ -95,7 +95,7 @@ def get_data(language: str) -> pd.DataFrame:
     log("Saved %i answers to %s" % (len(df), a_path))
     del df
 
-    log.section("Filtering answers")
+    log.section("Filtering comments")
     useful_comment_keys = useful_answer_keys
     filtered_comments = [
         {
