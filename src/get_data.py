@@ -51,7 +51,7 @@ def get_data(language: str) -> pd.DataFrame:
         questions += r["items"]
         # Save fetched data
         with open(os.path.join("data", language, "response_%i.json" % i), "w") as f:
-            json.dump(questions, f)
+            json.dump(r["items"], f)
 
         start += dt.timedelta(days=DAY_INTERVAL)
         end += dt.timedelta(days=DAY_INTERVAL)
