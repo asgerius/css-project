@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // { Language: { Word: TF-IDF } }
 export interface TFIDF {
@@ -15,7 +15,6 @@ export class CommonService {
     private addrs = {
         tfidf: "https://raw.githubusercontent.com/asgerius/css-project/master/data/tfidf.json",
         stopwords: "https://raw.githubusercontent.com/asgerius/css-project/master/data/stopwords.json",
-        notebook: "https://raw.githubusercontent.com/asgerius/css-project/master/notebook.html"
     };
 
     isLoading = true;
