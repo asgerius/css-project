@@ -6,6 +6,7 @@ export interface TFIDF {
     [key: string]: { [key: string]: number };
 }
 
+
 @Injectable({
     providedIn: 'root'
 })
@@ -17,16 +18,37 @@ export class CommonService {
     };
 
     isLoading = true;
-    tfidf: TFIDF | null = null;
+    tfidf: TFIDF = {};
+    languages: Array<string> = [];
+    langscores: { [key: string]: number } = {};
     stopwords: Array<string> = [];
+    stopwordRegex: RegExp = RegExp("");
+
+    get likeliestLanguage(): string {
+        let max = 0;
+        let best: string = "Unable to classify";
+        for (const lang of this.languages) {
+            if (this.langscores[lang] > max) {
+                max = this.langscores[lang];
+                best = lang;
+            }
+        }
+        return this.capitalize(best);
+    }
 
     constructor(private http: HttpClient) {
         const futures = [
             this.get<TFIDF>(this.addrs.tfidf).then((res) => {
                 this.tfidf = res;
+                this.languages = Object.keys(res);
+                for (const lang of this.languages) {
+                    this.langscores[lang] = 0;
+                }
             }),
             this.get<Array<string>>(this.addrs.stopwords).then((res) => {
                 this.stopwords = res;
+                // r"\b(" + "|".join(stopwords.words("english")) + r")\b"
+                this.stopwordRegex = RegExp("\\b(" + this.stopwords.join("|") + ")\\b", "gm");
             }),
         ];
         Promise.all(futures).then(() => {
@@ -34,11 +56,24 @@ export class CommonService {
         });
     }
 
-    private async getData() {
-
-    }
-
     public async get<T>(addr: string) {
         return this.http.get<T>(addr).toPromise();
+    }
+
+    public classify(text: string) {
+        const words = text.split(" ");
+        for (let lang of this.languages) {
+            this.langscores[lang] = 0;
+            for (let word of words) {
+                this.langscores[lang] += this.tfidf[lang][word] ?? 0;
+            }
+        }
+    }
+
+    public capitalize(text: string): string {
+        if (!text)
+            return text;
+        text = text.toLowerCase();
+        return text[0].toUpperCase() + text.substr(1);
     }
 }
