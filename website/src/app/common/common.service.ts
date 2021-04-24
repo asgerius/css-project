@@ -15,6 +15,7 @@ export class CommonService {
     private addrs = {
         tfidf: "https://raw.githubusercontent.com/asgerius/css-project/master/data/tfidf.json",
         stopwords: "https://raw.githubusercontent.com/asgerius/css-project/master/data/stopwords.json",
+        notebook: "https://raw.githubusercontent.com/asgerius/css-project/master/notebook.html"
     };
 
     isLoading = true;
