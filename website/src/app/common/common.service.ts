@@ -11,19 +11,34 @@ export interface TFIDF {
 })
 export class CommonService {
 
-    private addr = "https://raw.githubusercontent.com/asgerius/css-project/master/data/tfidf.json";
+    private addrs = {
+        tfidf: "https://raw.githubusercontent.com/asgerius/css-project/master/data/tfidf.json",
+        stopwords: "https://raw.githubusercontent.com/asgerius/css-project/master/data/stopwords.json",
+    };
 
     isLoading = true;
     tfidf: TFIDF | null = null;
+    stopwords: Array<string> = [];
 
     constructor(private http: HttpClient) {
-        this.getTFIDF().then((res) => {
-            this.tfidf = res;
+        const futures = [
+            this.get<TFIDF>(this.addrs.tfidf).then((res) => {
+                this.tfidf = res;
+            }),
+            this.get<Array<string>>(this.addrs.stopwords).then((res) => {
+                this.stopwords = res;
+            }),
+        ];
+        Promise.all(futures).then(() => {
             this.isLoading = false;
         });
     }
 
-    public async getTFIDF() {
-        return this.http.get<TFIDF>(this.addr).toPromise();
+    private async getData() {
+
+    }
+
+    public async get<T>(addr: string) {
+        return this.http.get<T>(addr).toPromise();
     }
 }

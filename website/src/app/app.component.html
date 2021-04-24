@@ -1,9 +1,43 @@
 <div class="content">
-    <h1><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">The best project ever</a></h1>
-    <ol>
-        <li>Asger Laurits Schultz</li>
-        <li>August Semrau Andersen</li>
-        <li>Andreas Hornemann Nielsen</li>
-    </ol>
+  <h1><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">The best project ever</a></h1>
+  <ol>
+      <li>Asger Laurits Schultz</li>
+      <li>August Semrau Andersen</li>
+      <li>Andreas Hornemann Nielsen</li>
+  </ol>
+
+  <div *ngIf="commonService.isLoading">
+    <p>Loading data...</p>
+    <div class="spinner"></div>
+  </div>
+  <div *ngIf="!commonService.isLoading">
+    <h2>Programming language classifier</h2>
+    <div class="row">
+      <div class="col-md">
+        <form>
+          <div class="form-group">
+            <label class="form-label" for="text-input">
+                Enter some text to classify it
+            </label>
+            <br>
+            <textarea id="text-input"
+                      class="form-input"
+                      style="max-width:100%;height:100px"
+                      [ngModel]="classifyText"
+                      (ngModelChange)="updateClassification($event)"
+                      name="classifyInput"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="col-md">
+        <label class="form-label">
+          After cleaning, your text looks like this
+        </label>
+        <div class="thin-border form-input" style="max-width:100%;height:100px">
+          {{cleanedText}}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
