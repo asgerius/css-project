@@ -6,6 +6,7 @@ local_*
 *.out
 .python-version
 key.txt
+data.pkl
 
 # Latex
 *.aux
