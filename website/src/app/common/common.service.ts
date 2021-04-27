@@ -47,7 +47,6 @@ export class CommonService {
             }),
             this.get<Array<string>>(this.addrs.stopwords).then((res) => {
                 this.stopwords = res;
-                // r"\b(" + "|".join(stopwords.words("english")) + r")\b"
                 this.stopwordRegex = RegExp("\\b(" + this.stopwords.join("|") + ")\\b", "gm");
             }),
         ];

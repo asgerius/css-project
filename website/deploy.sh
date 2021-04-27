@@ -1,1 +1,1 @@
-ng deploy --base-href=/compsosci/
+ng deploy --base-href=/css-project/

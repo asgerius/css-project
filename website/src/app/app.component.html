@@ -45,15 +45,21 @@
     <div class="table--responsive-scroll" style="margin-top:20px">
       <h3 class="h5">Total TF-IDF scores by language</h3>
       <p>Best guess: {{commonService.likeliestLanguage}}</p>
-      <table class="table">
-        <thead>
-          <tr>
-            <th *ngFor="let lang of commonService.languages">{{commonService.capitalize(lang)}}</th>
-          </tr>
-        </thead>
+      <table class="table table--compact">
         <tbody>
           <tr>
-            <td *ngFor="let lang of commonService.languages" style="text-align: right">
+            <th *ngFor="let lang of commonService.languages.slice(0, 8)">{{commonService.capitalize(lang)}}</th>
+          </tr>
+          <tr>
+            <td *ngFor="let lang of commonService.languages.slice(0, 8)" style="text-align: right">
+              {{(commonService.langscores[lang] ? commonService.langscores[lang] : 0) | number:"1.4-4"}}
+            </td>
+          </tr>
+          <tr>
+            <th *ngFor="let lang of commonService.languages.slice(8)">{{commonService.capitalize(lang)}}</th>
+          </tr>
+          <tr>
+            <td *ngFor="let lang of commonService.languages.slice(8)" style="text-align: right">
               {{(commonService.langscores[lang] ? commonService.langscores[lang] : 0) | number:"1.4-4"}}
             </td>
           </tr>
