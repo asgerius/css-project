@@ -6,7 +6,7 @@ numpy>=1.20.0
 matplotlib
 scipy
 
-pelutils>=0.5.9
+pelutils>=0.6.1
 stackapi
 tqdm
 click
