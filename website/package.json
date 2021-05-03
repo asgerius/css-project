@@ -20,8 +20,10 @@
     "@angular/platform-browser-dynamic": "~11.2.6",
     "@angular/router": "~11.2.6",
     "angular-cli-ghpages": "^1.0.0-rc.1",
+    "angular-plotly.js": "^3.1.0",
     "dkfds": "^7.2.0",
     "plotly.js": "^1.58.4",
+    "plotly.js-dist": "^1.58.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
