@@ -12,10 +12,13 @@
   </a>
   <h2>Table of contents</h2>
   <ol>
+    <li>Introduction</li>
     <li>Data</li>
     <li>Stack Overflow as a Graph</li>
-    <li>Sentiment analysis and loved languages</li>
+    <li>Sentiment Analysis and Loved Languages</li>
     <li>Building a Language Classifier Using TF-IDF</li>
+    <li>Partitioning the Graph Using the Classifier</li>
+    <li>Discussion</li>
   </ol>
 
   <div *ngIf="commonService.isLoading">
@@ -23,9 +26,12 @@
     <div class="spinner"></div>
   </div>
   <div *ngIf="!commonService.isLoading">
+    <app-introduction></app-introduction>
     <app-data></app-data>
     <app-graph></app-graph>
     <app-sentiment></app-sentiment>
     <app-tfidf></app-tfidf>
+    <app-partion></app-partion>
+    <app-discussion></app-discussion>
   </div>
 </div>

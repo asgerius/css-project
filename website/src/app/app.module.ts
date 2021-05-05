@@ -12,6 +12,9 @@ import { TfidfComponent } from './tfidf/tfidf.component';
 import { DataComponent } from './data/data.component';
 import { GraphComponent } from './graph/graph.component';
 import { SentimentComponent } from './sentiment/sentiment.component';
+import { IntroductionComponent } from './introduction/introduction.component';
+import { PartionComponent } from './partion/partion.component';
+import { DiscussionComponent } from './discussion/discussion.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -21,7 +24,10 @@ PlotlyModule.plotlyjs = PlotlyJS;
     TfidfComponent,
     DataComponent,
     GraphComponent,
-    SentimentComponent
+    SentimentComponent,
+    IntroductionComponent,
+    PartionComponent,
+    DiscussionComponent
   ],
   imports: [
     BrowserModule,
