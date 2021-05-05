@@ -1,12 +1,36 @@
 <h2>2. Data</h2>
 
+<h5>Overview and Collection</h5>
 <p>
     We collected our data using the Stack Overflow API.
+    We queried for up to 100 threads per week in the period 2015-2019 for each of the 16 afforementioned programming languages by asking for threads with the languages as tags.
+    A thread consists a question as well as a number of answers and comments, which can both be to the question itself and to the answers.
+    As we query by question date, some of the data extends past 2019 due to later activity on the thread.
+    The set of all questions, answers, and comments will be denoted the submissions.
+    All submissions are collected into a single dataframe, where each row is a submission.
+    For each submission, the informtion on the author, the body of text (which is raw HTML), the question ID, the date of posting, the language, and, for comments if relevant, the answer ID, is saved.
+    In total, the collected data totals roughly 1.4 GB.
+    This spans 182,408 questions, 252,116 answers, and 834,792 comments for a total of 1,269,316 submissions written by 227,297 authors.
 </p>
+<p>
+    We also use the <a href="https://insights.stackoverflow.com/survey/2020#most-loved-dreaded-and-wanted">Stack Overflow 2020 Developer Survey</a>.
+    In particular, we use the question on the most loved programming languages, which is the number of active developers who would like to continue developing with the given language.
+</p>
+
+<h5>Preparation and Cleaning</h5>
+<p>
+    The data preparation consists of two cleanings, one targeting a classifier, and one targeting sentiment analysis.
+    For both, we remove links, stopwords, and HTML tags.
+    For classification, non-alphanumeric characters are furthermore removed, and all text is converted to lower case.
+    For sentiment analysis, code sections are removed.
+</p>
+
+<h5>Obtaining the Data</h5>
 <p>
     Our raw data is available on <a href="https://github.com/asgerius/css-project/">our GitHub repository</a> under the "data" folder, where it is split by programming language.
     The prepared dataframe is too large to host on GitHub, but it can be generated locally.
     Simply clone the repository and run all cells in section 2.
-    This will generate a local Pandas DataFrame that is saved as "data.pkl".
+    This will generate a local Pandas DataFrame that is saved as "data.pkl" and fills 1.7 GB.
+    It contains all submissions with their described features as well as the text cleaned in both described ways.
 </p>
 
