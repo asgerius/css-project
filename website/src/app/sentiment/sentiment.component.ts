@@ -13,16 +13,38 @@ export class SentimentComponent implements OnInit {
   a: number = 0;
   b: number = 0;
   corr: number = 0;
+  sentdist: any = null;
 
   constructor(public commonService: CommonService) { }
 
   ngOnInit(): void {
     this.update();
-    // const b = this.commonService.sentcorr?.belovedness;
-    // const m = this.commonService.sentcorr?.mean_sent;
-    // const a: any = this.commonService.sentcorr?.a;
-    // const b2: any = this.commonService.sentcorr?.b;
-    // this.setSentcorr(b, m, a, b2);
+    this.sentdist = {
+      data: [
+        {
+          x: this.commonService.sentdist?.sent,
+          y: this.commonService.sentdist?.prob,
+          mode: "lines+markers",
+        },
+      ],
+      layout: {
+        xaxis: {
+          title: "Compound sentiment",
+          range: [-1, 1],
+          gridcolor: "lightgrey",
+        },
+        yaxis: {
+          title: "Probability density",
+          autorange: true,
+          type: "log",
+          gridcolor: "lightgrey",
+        },
+        title: "Compound sentiment distribution",
+      },
+      config: {
+        responsive: true,
+      },
+    };
   }
 
   update() {
@@ -66,13 +88,14 @@ export class SentimentComponent implements OnInit {
       layout: {
         xaxis: {
           title: "Belovedness [%]",
-          range: [0.01, 100],
+          range: [0, 100],
           gridcolor: "lightgrey",
         },
         yaxis: {
           title: "Mean sentiment",
           range: [0.15, 0.33],
           gridcolor: "lightgrey",
+          linecolor: "#ffffff",
         },
         title: "Sentiment against belovedness",
       },

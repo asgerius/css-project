@@ -1,5 +1,27 @@
 <h2>4. Sentiment Analysis and Loved Languages</h2>
 
+<p>
+    One might suspect that people in general are more positive when asking and answering questions about technologies that they like.
+    The purpose of this section is to figure out if that is indeed the case:
+    Is there a positive correlation between sentiment and how beloved a language is according to the developer survey?
+</p>
+
+<div class="row">
+    <div class="col-md-5">
+        <p>
+            To do this, we use <a href="https://pypi.org/project/vader-sentiment/">VADER</a> for analyzing sentiments.
+            VADER uses both dictionary based methods and context to calculate sentiments given a text piece, which helps it achieve useful results.
+        </p>
+        <p>
+            First, we look at the overall distribution of sentiments.
+            It is not surprising that are large amount of sentiments are precisely 0 (24 % to be exact), as a large amount objective language is expected.
+        </p>
+    </div>
+    <div class="col-md-7">
+        <plotly-plot [data]="sentdist.data" [layout]="sentdist.layout" [config]="sentdist.config"></plotly-plot>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-9">
         <plotly-plot [data]="sentcorr.data" [layout]="sentcorr.layout" [config]="sentcorr.config"></plotly-plot>

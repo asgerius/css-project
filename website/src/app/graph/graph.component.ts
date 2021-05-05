@@ -34,7 +34,7 @@ export class GraphComponent implements OnInit {
           gridcolor: "lightgrey",
         },
         yaxis: {
-          title: "Probability distribution",
+          title: "Probability density",
           autorange: true,
           type: "log",
           gridcolor: "lightgrey",
