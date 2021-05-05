@@ -1,1 +1,24 @@
 <h2>3. Sentiment analysis and loved languages</h2>
+
+
+    <div class="row">
+        <div class="col-md-9">
+            <plotly-plot [data]="sentcorr.data" [layout]="sentcorr.layout" [config]="sentcorr.config"></plotly-plot>
+        </div>
+        <div class="col-md-3">
+            <form>
+                <div class="form-group">
+                    <ul class="nobullet-list">
+                        <li *ngFor="let lang of commonService.languages; let i = index;">
+                            <input [id]="lang" type="checkbox" (ngModelChange)="onChange(i, $event)" [ngModel]="selectedLanguages[i]" [name]="lang">&nbsp;
+                            <label [for]="lang">{{commonService.capitalize(lang)}}</label>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p>
+        Best fit: y = {{a|number:"1.6-6"}}x + {{b|number:"1.4-4"}}<br>
+        Correlation: {{corr|number:"1.4-4"}}
+    </p>

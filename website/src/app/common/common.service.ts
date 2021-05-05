@@ -13,6 +13,13 @@ export interface Validation {
     f1s: Array<number>;
 }
 
+export interface SentCorr {
+    belovedness: Array<number>;
+    mean_sent: Array<number>;
+    a: number;
+    b: number;
+}
+
 export const layoutDefaults: any = {
     autoexpand: "true", autosize: "true",
     margin: {autoexpand: "true", margin: 0},
@@ -44,6 +51,7 @@ export class CommonService {
         tfidf: "https://raw.githubusercontent.com/asgerius/css-project/master/data/tfidf.json",
         stopwords: "https://raw.githubusercontent.com/asgerius/css-project/master/data/stopwords.json",
         validation: "https://raw.githubusercontent.com/asgerius/css-project/master/data/accs_f1.json",
+        sentcorr: "https://raw.githubusercontent.com/asgerius/css-project/master/data/sentcorr.json",
     };
 
     isLoading = true;
@@ -55,6 +63,7 @@ export class CommonService {
     stopwordRegex: RegExp = RegExp("");
 
     validation: Validation | null = null;
+    sentcorr: SentCorr | null = null;
 
     get likeliestLanguage(): string {
         let max = 0;
@@ -77,12 +86,15 @@ export class CommonService {
                     this.langscores[lang] = 0;
                 }
             }),
-            this.get<Array<string>>(this.addrs.stopwords).then((res) => {
+            this.get<Array<string>>(this.addrs.stopwords).then(res => {
                 this.stopwords = res;
                 this.stopwordRegex = RegExp("\\b(" + this.stopwords.join("|") + ")\\b", "gm");
             }),
-            this.get<Validation>(this.addrs.validation).then((res) => {
+            this.get<Validation>(this.addrs.validation).then(res => {
                 this.validation = res;
+            }),
+            this.get<SentCorr>(this.addrs.sentcorr).then(res => {
+                this.sentcorr = res;
             }),
         ];
         Promise.all(futures).then(() => {

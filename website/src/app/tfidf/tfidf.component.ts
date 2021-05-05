@@ -43,7 +43,6 @@ export class TfidfComponent implements OnInit {
       },
       config: {
         responsive: true,
-        scrollZoom: true,
       },
     };
   }
