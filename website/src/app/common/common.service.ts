@@ -91,9 +91,9 @@ export class CommonService {
             this.get<SentCorr>(this.addrs.sentcorr).then(res => {
                 this.sentcorr = res;
             }),
-            // this.get<SentDist>(this.addrs.sentdist).then(res => {
-            //     this.sentdist = res;
-            // }),
+            this.get<SentDist>(this.addrs.sentdist).then(res => {
+                this.sentdist = res;
+            }),
             this.get<Degdist>(this.addrs.degdist).then(res => {
                 this.degdist = res;
             }),
