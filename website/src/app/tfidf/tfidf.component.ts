@@ -1,6 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import * as Plotly from 'plotly.js';
-import { CommonService, layoutDefaults } from '../common/common.service';
+import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../common/common.service';
 
 @Component({
   selector: 'app-tfidf',
@@ -34,7 +33,8 @@ export class TfidfComponent implements OnInit {
         xaxis: {
           title: "Maximum vocabulary size",
           type: 'log',
-          autorange: true
+          autorange: true,
+          gridcolor: "lightgrey",
         },
         yaxis: {
           title: "Validation score [%]",
@@ -43,6 +43,7 @@ export class TfidfComponent implements OnInit {
       },
       config: {
         responsive: true,
+        gridcolor: "lightgrey",
       },
     };
   }

@@ -67,10 +67,12 @@ export class SentimentComponent implements OnInit {
         xaxis: {
           title: "Belovedness [%]",
           range: [0.01, 100],
+          gridcolor: "lightgrey",
         },
         yaxis: {
           title: "Mean sentiment",
-          autorange: true,
+          range: [0.15, 0.33],
+          gridcolor: "lightgrey",
         },
         title: "Sentiment against belovedness",
       },

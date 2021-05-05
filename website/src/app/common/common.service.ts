@@ -20,26 +20,17 @@ export interface SentCorr {
     b: number;
 }
 
-export const layoutDefaults: any = {
-    autoexpand: "true", autosize: "true",
-    margin: {autoexpand: "true", margin: 0},
-    // type: "scattergl",
-    hovermode: "closest",
-    xaxis: {
-      linecolor: "black",
-      linewidth: 2,
-      mirror: true,
-      title: "",
-      automargin: true
-    },
-    yaxis: {
-      linecolor: "black",
-      linewidth: 2,
-      mirror: true,
-      automargin: true,
-      title: 'Any other Unit'
-    },
-  };
+export interface SentDist {
+    sent: Array<number>;
+    prob: Array<number>;
+}
+
+export interface Degdist {
+    in_hist: Array<number>;
+    x_in: Array<number>;
+    out_hist: Array<number>;
+    x_out: Array<number>;
+}
 
 
 @Injectable({
@@ -52,6 +43,8 @@ export class CommonService {
         stopwords: "https://raw.githubusercontent.com/asgerius/css-project/master/data/stopwords.json",
         validation: "https://raw.githubusercontent.com/asgerius/css-project/master/data/accs_f1.json",
         sentcorr: "https://raw.githubusercontent.com/asgerius/css-project/master/data/sentcorr.json",
+        sentdist: "https://raw.githubusercontent.com/asgerius/css-project/master/data/sentdist.json",
+        degdist: "https://raw.githubusercontent.com/asgerius/css-project/master/degreeplots/so_graph_degreehist.json",
     };
 
     isLoading = true;
@@ -64,6 +57,8 @@ export class CommonService {
 
     validation: Validation | null = null;
     sentcorr: SentCorr | null = null;
+    sentdist: SentDist | null = null;
+    degdist: Degdist | null = null;
 
     get likeliestLanguage(): string {
         let max = 0;
@@ -95,6 +90,12 @@ export class CommonService {
             }),
             this.get<SentCorr>(this.addrs.sentcorr).then(res => {
                 this.sentcorr = res;
+            }),
+            // this.get<SentDist>(this.addrs.sentdist).then(res => {
+            //     this.sentdist = res;
+            // }),
+            this.get<Degdist>(this.addrs.degdist).then(res => {
+                this.degdist = res;
             }),
         ];
         Promise.all(futures).then(() => {

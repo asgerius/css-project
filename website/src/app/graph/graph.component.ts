@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../common/common.service';
 
 @Component({
   selector: 'app-graph',
@@ -7,9 +8,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GraphComponent implements OnInit {
 
-  constructor() { }
+  degdist: any = null;
+
+  constructor(public commonService: CommonService) { }
 
   ngOnInit(): void {
+    this.degdist = {
+      data: [
+        {
+          x: this.commonService.degdist?.x_in,
+          y: this.commonService.degdist?.in_hist,
+          name: "In-degree",
+        },
+        {
+          x: this.commonService.degdist?.x_out,
+          y: this.commonService.degdist?.out_hist,
+          name: "Out-degree",
+        },
+      ],
+      layout: {
+        xaxis: {
+          title: "Degree",
+          autorange: true,
+          type: "log",
+          gridcolor: "lightgrey",
+        },
+        yaxis: {
+          title: "Probability distribution",
+          autorange: true,
+          type: "log",
+          gridcolor: "lightgrey",
+        },
+        title: "Degree distribution",
+      },
+      config: {
+        responsive: true,
+      },
+    };
   }
 
 }
