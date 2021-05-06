@@ -32,6 +32,15 @@ export interface Degdist {
     x_out: Array<number>;
 }
 
+export interface Sizedist {
+    qx: Array<number>;
+    qdist: Array<number>;
+    ax: Array<number>;
+    adist: Array<number>;
+    cx: Array<number>;
+    cdist: Array<number>;
+}
+
 
 @Injectable({
     providedIn: 'root'
@@ -45,6 +54,9 @@ export class CommonService {
         sentcorr: "https://raw.githubusercontent.com/asgerius/css-project/master/data/sentcorr.json",
         sentdist: "https://raw.githubusercontent.com/asgerius/css-project/master/data/sentdist.json",
         degdist: "https://raw.githubusercontent.com/asgerius/css-project/master/degreeplots/so_graph_degreehist.json",
+        ndist: "https://raw.githubusercontent.com/asgerius/css-project/master/data/Nocleaning.json",
+        cdist: "https://raw.githubusercontent.com/asgerius/css-project/master/data/Classificationcleaning.json",
+        sdist: "https://raw.githubusercontent.com/asgerius/css-project/master/data/Sentimentanalysiscleaning.json",
     };
 
     isLoading = true;
@@ -59,6 +71,9 @@ export class CommonService {
     sentcorr: SentCorr | null = null;
     sentdist: SentDist | null = null;
     degdist: Degdist | null = null;
+    ndist: Sizedist | null = null;
+    cdist: Sizedist | null = null;
+    sdist: Sizedist | null = null;
 
     get likeliestLanguage(): string {
         let max = 0;
@@ -96,6 +111,15 @@ export class CommonService {
             }),
             this.get<Degdist>(this.addrs.degdist).then(res => {
                 this.degdist = res;
+            }),
+            this.get<Sizedist>(this.addrs.ndist).then(res => {
+                this.ndist = res;
+            }),
+            this.get<Sizedist>(this.addrs.cdist).then(res => {
+                this.cdist = res;
+            }),
+            this.get<Sizedist>(this.addrs.sdist).then(res => {
+                this.sdist = res;
             }),
         ];
         Promise.all(futures).then(() => {

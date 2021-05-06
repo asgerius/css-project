@@ -5,16 +5,23 @@
     The purpose of this section is to figure out if that is indeed the case:
     Is there a positive correlation between sentiment and how beloved a language is according to the developer survey?
 </p>
+<p>
+    To do this, we use <a href="https://pypi.org/project/vader-sentiment/">VADER</a> for analyzing sentiments.
+    VADER uses both dictionary based methods and context to calculate sentiments given a text piece, which helps it achieve useful results.
+</p>
 
 <div class="row">
     <div class="col-md-5">
         <p>
-            To do this, we use <a href="https://pypi.org/project/vader-sentiment/">VADER</a> for analyzing sentiments.
-            VADER uses both dictionary based methods and context to calculate sentiments given a text piece, which helps it achieve useful results.
+            First, we look at the overall distribution of sentiments.
+            24 % of sentiments are exactly 0, which is expected both due to the short length of many submissions and large amount objective language is expected.
         </p>
         <p>
-            First, we look at the overall distribution of sentiments.
-            It is not surprising that are large amount of sentiments are precisely 0 (24 % to be exact), as a large amount objective language is expected.
+            We then plot the sentiments of the submissions against the belovedness of the languages and calculate the best linear fit with the least squares method.
+            A weak, positive correlation appears.
+            This is indicative that people are more positive when writing about languages that they enjoy using.
+            Surprisingly, however, VBA, is a significant outlier, being both the least beloved language and also having by far the highest sentiment.
+            If you try removing it, you can see the correlation becoming much stronger.
         </p>
     </div>
     <div class="col-md-7">
@@ -47,7 +54,7 @@
 <div class="row">
     <div class="col-md-4">
         <p>
-            We have used the belovedness scores from the 2020 survey.
+            A potential weakness of this study is that we have used the belovedness scores from the 2020 survey.
             As most of our data is older, we make sure no temporal differences exist, so that the comparison with sentiment scores makes sense.
             As the figure shows, there is little variation over time.
             The grey lines are for each individual langauge, and while variant, they overall change little.

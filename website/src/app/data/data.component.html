@@ -10,7 +10,7 @@
     All submissions are collected into a single dataframe, where each row is a submission.
     For each submission, the informtion on the author, the body of text (which is raw HTML), the question ID, the date of posting, the language, and, for comments if relevant, the answer ID, is saved.
     In total, the collected data totals roughly 1.4 GB.
-    This spans 182,408 questions, 252,116 answers, and 834,792 comments for a total of 1,269,316 submissions written by 227,297 authors.
+    This spans 182,678 questions, 252,693 answers, and 837,182 comments for a total of 1,272,553 submissions written by 227,571 authors.
 </p>
 <p>
     We also use the <a href="https://insights.stackoverflow.com/survey/2020#most-loved-dreaded-and-wanted">Stack Overflow 2020 Developer Survey</a>.
@@ -23,7 +23,30 @@
     For both, we remove links, stopwords, and HTML tags.
     For classification, non-alphanumeric characters are furthermore removed, and all text is converted to lower case.
     For sentiment analysis, code sections are removed.
+    To understand how the cleaning affected the size of the submissions, we plot the distribution of submission sizes by word before cleaning and after each type of cleaning.
 </p>
+<div class="row">
+    <div class="col-md-6">
+        <p>
+            Unexpectedly, both cleanings reduce the size of the submissions, though not by much, and the shapes of the distributions are retained.
+        </p>
+        <p>
+            It is seen while questions largely are only a little longer than answers, very short answers are much more common than very short questions.
+            Furthermore, comments stand out as generally much shorter than either of the other two submission types, which is not surprising.
+        </p>
+    </div>
+    <div class="col-md-6">
+        <plotly-plot [data]="n.data" [layout]="n.layout" [config]="n.config"></plotly-plot>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <plotly-plot [data]="c.data" [layout]="c.layout" [config]="c.config"></plotly-plot>
+    </div>
+    <div class="col-md-6">
+        <plotly-plot [data]="s.data" [layout]="s.layout" [config]="s.config"></plotly-plot>
+    </div>
+</div>
 
 <h5>Obtaining the Data</h5>
 <p>

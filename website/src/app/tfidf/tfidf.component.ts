@@ -38,6 +38,7 @@ export class TfidfComponent implements OnInit {
         },
         yaxis: {
           title: "Validation score [%]",
+          gridcolor: "lightgrey",
         },
         title: "Classifier validation",
       },
