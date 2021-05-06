@@ -38,6 +38,7 @@ export class GraphComponent implements OnInit {
           autorange: true,
           type: "log",
           gridcolor: "lightgrey",
+          exponentformat: 'e',
         },
         title: "Degree distribution",
       },
