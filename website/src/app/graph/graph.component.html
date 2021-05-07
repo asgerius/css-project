@@ -37,8 +37,13 @@
     <p>Running the Louvain algorithm to end this partitioning investigation, yields a modularity of 0.7629 with 6113 partitions.<br>The Louvain algorithm thus found a higher modularity than with the programming language specific partitioning. 
     This shows that it is possible to divide the graph into components that are even stronger internally connected according to the modularity measure.</p>
     <h5>Vizualizing the network</h5>
-    <p>Lastly, we use Netwulf to show the Stack Overflow network graph, each progamming language having the color seen in the table to the right.<br>Looking at the network like this, seemingly indicates that users who belong to the programming languages Python and Javascript mix quite a bit, and gravitate toward the middle of the graph, meaning they presumably interact more or less with all the other partitions, and telling the story of users who come to Stack Overflow, mainly having problems related to the two languages, but also related others.
-    These two are starkly contrasted by the users partitioned to the programming languages Haskell, objective-c, go, dart, ruby, vba and perl which all group closely together, telling the story of users coming to Stack Overflow with problems only related to one of these programming languages.</p>
+    <p>Lastly, we use Netwulf to show the Stack Overflow network graph, each progamming language having the color seen in the table to the right.</p>
+    <p>Looking at the network like this, some observations can be made:</p>
+    <ul>
+    <li>It seems that users who belong to the programming languages Java, Javascript and to some extent Typescript and Python mix quite a bit, and especially the first two gravitate toward the middle of the graph, meaning they presumably interact more or less with all the other partitions. This indicates that users in these partitions come to Stack Overflow mainly to ask or answer/comment on problems related to the four programming languages, but also interact on other programming languages.</li>
+    <li>This above notion is starkly contrasted by the users belonging to the programming languages Rust, Objective-c, Go, Dart, Ruby, Vba and Perl which all group densely alone, indicating these users come to Stack Overflow with problems only related to one of these programming languages, and rarely interact on other prgoramming languages.</li>
+    <li>Not so strangely, the two closely related programming languages C and C++ also seem closely related in the graph, grouping closely with one another.</li>
+    </ul>
     <p>VIS BILLEDE AF NETVÆRKET</p>
     
 
