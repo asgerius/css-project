@@ -32,12 +32,12 @@
     Specifically, modularity measures how much edge densities in each partition vary from the global edge density. 
     In random networks, no systematic differences exist, and the modularity should be expected to be distributed with a mean of 0. 
     This provides a way to determine if a given partitioning is a result of chance or not.</p>
-    <p>Using Networkx, we find that the modularity of the Stack Overflow network graph is $modularity(so_graph) = 0.7366$, which indicates the graph with it&#39;s partitions is not random.</p>
+    <p>Using Networkx, we find that the modularity of the Stack Overflow network graph is modularity(so_graph) = 0.7357, which indicates the graph with it&#39;s partitions is not random.</p>
     <p>To further confirm this, we use a configuration model for generating random variations of the Stack overflow network graph, which show a modularity naturally distributed, <em>very</em> closely around 0.</p>
     <p>VIS DIST PLOT FOR CONF-MODEL MODULARITET</p>
     <p>It seems the partitioning of the different programming languages is very good.</p>
     <h5>Louvain Algorithm</h5>
-    <p>Running the Louvain algorithm to end this partitioning investigation, yields a modularity of $0.761$ with 5982 partitions.<br>The Louvain algorithm thus found a higher modularity than with the programming language specific partitioning. 
+    <p>Running the Louvain algorithm to end this partitioning investigation, yields a modularity of 0.7629 with 6113 partitions.<br>The Louvain algorithm thus found a higher modularity than with the programming language specific partitioning. 
     This shows that it is possible to divide the graph into components that are even stronger internally connected according to the modularity measure.</p>
     <h5>Vizualizing the network</h5>
     <p>Lastly, we use Netwulf to show the Stack Overflow network graph, each progamming language having the color seen in the table to the right.<br>Looking at the network like this, seemingly indicates that users who belong to the programming languages Python and Javascript mix quite a bit, and gravitate toward the middle of the graph, meaning they presumably interact more or less with all the other partitions, and telling the story of users who come to Stack Overflow, mainly having problems related to the two languages, but also related others.
