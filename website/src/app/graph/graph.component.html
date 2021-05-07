@@ -17,30 +17,32 @@ The data collection process did not intentionally bias on the basis of any perci
     <li>The max in and out-degrees are significantly larger for several of the programming languages which featured a smaller number of nodes and edges, which indicates that there are less widespread knowledge of the programming language and fewer, bigger players who help the community. This is especially true at Rust, which has one user whose outgoing edges accounted for around 15% of the total number of edges. </li>
     <li>The mode out suggests, that for all programming language partitions, as well as the big graph, around half of users come to Stack Overflow, leave one answer or comment and then leaves. </li>
 </ul>
-<p>The above degree-data is plotted as histograms below:</p>
-<p>VIS IN- OUT-DEGREE HISTOGRAM FOR STOR SO GRAF</p>
+<p>
+    The following figure shows the distribution of in and out degrees in the network.
+    In the notebook, the distributions for the single-language networks are also plotted, with all of them looking similar to the full graph.
+</p>
 <plotly-plot [data]="degdist.data" [layout]="degdist.layout" [config]="degdist.config"></plotly-plot>
-<p>VIS IN- OUT-DEGREE HISTOGRAMS FOR 16 PARTITION GRAFER</p>
+
 <p>From the degree plots, we see that the different programming language partitions are very similar, though still importantly resemble real, non-random networks.</p>
 <h5>Modularity</h5>
+<p>We now want to investigate whether the network we have graphed from the Stack Overflow data is in fact random or not.
+By having partitioned the Stack Overflow network graph based on the different programming languages, we can compute the modularity of the graph and answer this question.</p>
+<p>Modularity is loosely speaking a measure of how good a given partitioning of a graph is, with higher modularity implying better partitioning.
+Specifically, modularity measures how much edge densities in each partition vary from the global edge density.
+In random networks, no systematic differences exist, and the modularity should be expected to be distributed with a mean of 0.
+This provides a way to determine if a given partitioning is a result of chance or not.</p>
 <div class="row">
     <div class="col-md-6">
-
+        <p>The modularity of the Stack Overflow network graph is 0.7357, which indicates that programming languages partition the graph into clear communities.</p>
+        <p>To further confirm this, we use a configuration model for generating 200 random variations of the Stack overflow network graph, which show a modularity somewhat normally distributed around 0 with a tiny standard deviation.</p>
+        <p>It seems the partitioning of the different programming languages is very good.</p>
     </div>
     <div class="col-md-6">
         <img src="https://github.com/asgerius/css-project/raw/master/website/src/assets/confmodel.png">
     </div>
 </div>
-<p>We now want to investigate whether the network we have graphed from the Stack Overflow data is in fact random or not.
-By having partitioned the Stack Overflow network graph based on the different programming languages, we can compute the modularity of the graph and answer this question.</p>
-<p>Modularity is loosely speaking a measure of how good a given partitioning of a graph is, with higher modularity implying better partitioning. 
-Specifically, modularity measures how much edge densities in each partition vary from the global edge density. 
-In random networks, no systematic differences exist, and the modularity should be expected to be distributed with a mean of 0. 
-This provides a way to determine if a given partitioning is a result of chance or not.</p>
-<p>Using Networkx, we find that the modularity of the Stack Overflow network graph is modularity(so_graph) = 0.7357, which indicates the graph with it&#39;s partitions is not random.</p>
-<p>To further confirm this, we use a configuration model for generating random variations of the Stack overflow network graph, which show a modularity naturally distributed, <em>very</em> closely around 0.</p>
-<p>VIS DIST PLOT FOR CONF-MODEL MODULARITET</p>
-<p>It seems the partitioning of the different programming languages is very good.</p>
+<p></p>
+
 <h5>The Louvain Algorithm</h5>
 <p>Running the Louvain algorithm to end this partitioning investigation, yields a modularity of 0.7629 with 6113 partitions.<br>The Louvain algorithm thus found a higher modularity than with the programming language specific partitioning. 
 This shows that it is possible to divide the graph into components that are even stronger internally connected according to the modularity measure.</p>
@@ -54,10 +56,10 @@ This shows that it is possible to divide the graph into components that are even
     <li>Not so strangely either, Python and Perl also seem closely related in the graph, this going with the notion that these programming languages are quite similar.</li>
 </ul>
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-9">
         <img src="https://github.com/asgerius/css-project/raw/master/website/src/assets/network.png">
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
         <img src="https://github.com/asgerius/css-project/raw/master/website/src/assets/colours.png">
     </div>
 </div>
