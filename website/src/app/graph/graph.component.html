@@ -5,15 +5,12 @@
     <p>The graph-making process can be further inspected in the notebook, where we use Networkx to model the Stack Overflow data as a DiGraph.</p>
     <p>This graph can be partitioned into 16 subgraphs, ie. the 16 different programming languages, and as each user is not bound to interact on just one og these languages, we devide the nodes (users) into partitions based on which programming language they are most heavily weighted and therefor interacted most on.</p>
     
-    <h5>Number of Nodes, Edges and Density</h5>
-    <p>Below we see the number of nodes, edges and density of each partition and entire Stack Overflow network graph.</p>
-    <p>VIS BASIC STATISTICS MED # NODES, EDGES &amp; DENSITY</p>
-    <p>As is clear on the above table, the number of nodes and edges varies quite a bit for the different programming languages. 
+    <h5>Number of Nodes, Edges, Density and In- and Out-Degrees</h5>
+    <p>On the table further down, we see the number of nodes, edges and density of each partition and entire Stack Overflow network graph on the three leftmost columns.</p>
+    <p>From this, it is clear that the number of nodes and edges varies quite a bit for the different programming languages. 
     The data collection process did not intentionally bias on the basis of any percieved programming popularity, or the included belovedness scores, but did in fact collect different amounts of data based on availability for each programming language, and this is what mainly causes the size difference.</p>
     <p>We see that the graph densities are very low, which is no suprise given the very large number of nodes.<br>Recall density is given by density(G) = m &#47; (n &middot; (n-1)), in which n is the number of nodes and m is number of edges, ie. we would need m = n &middot; (n-1) edges for a complete graph with density 1, around 50 billion (9 zeros) for the big Stack Overflow Network graph.</p>
-    
-    <h5>In- and Out-Degrees</h5>
-    <p>Below, we show in- and out-degrees of the subgraphs and the big Stach Overflow network graph in a table table.</p>
+    <p>The table also shows in- and out-degrees of the subgraphs and the big Stach Overflow network graph.</p>
     <p>VIS IN- OUT-DEGREE TABLE</p>
     <p>The degree table and histograms above showcase som key insights in the data:</p>
     <ul>
