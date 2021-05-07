@@ -18,12 +18,12 @@ export class GraphComponent implements OnInit {
         {
           x: this.commonService.degdist?.x_in,
           y: this.commonService.degdist?.in_hist,
-          name: "In-degree",
+          name: "In-degrees",
         },
         {
           x: this.commonService.degdist?.x_out,
           y: this.commonService.degdist?.out_hist,
-          name: "Out-degree",
+          name: "Out-degrees",
         },
       ],
       layout: {
